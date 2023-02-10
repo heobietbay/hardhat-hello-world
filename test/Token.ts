@@ -13,12 +13,49 @@ describe("Token contract", function () {
   //   const ownerBalance = await hardhatToken.balanceOf(owner.address);
   //   expect(await hardhatToken.totalSupply()).to.equal(ownerBalance);
   // });
+  it("Should execute an already deployed token by using a given address", async function() {
+    /*
+    const tokenCompiledInfo = require("../artifacts/contracts/Token.sol/Token.json");
 
-  it("Should transfer tokens between accounts", async function () {
+    let contract = new ethers.Contract("0x1C3fDA9aBA84C3bED5c987A9a65dC4991303f539", 
+    tokenCompiledInfo.abi, 
+    ethers.getDefaultProvider());
+
+    console.dir(contract);
+    */
+
+
+  // need to do build first: npx hardhat compile
+  // then deploy: npx hardhat run --network localhost scripts/deploy.ts
+
+
+   // will investigate to do using abi later
+   // Now, using getContractfactory then attach
+   const TokenFactory = await ethers.getContractFactory('Token');
+   const tokenContract = await TokenFactory.attach('0x1C3fDA9aBA84C3bED5c987A9a65dC4991303f539');
+
+    // accounts coming from hardhat.config networks.accounts
+    const accounts = await ethers.getSigners();
+
+    // now try calling the contract method to get info from them
+    for (const account of accounts) {
+      console.log(`Account ${account.address}`);
+      const balance = await tokenContract.balanceOf(account.address);
+      console.log(`balance: ${balance}`);
+    }
+    await tokenContract.transfer(accounts[1].address, 10);
+    const updateAdd2Bal = await tokenContract.balanceOf(accounts[1].address);
+    console.log('',updateAdd2Bal);
+  });
+
+  // Skip deployment for now
+  it.skip("Should transfer tokens between accounts", async function () {
 
     const Token = await ethers.getContractFactory("Token");
 
     const hardhatToken = await Token.deploy();
+
+    console.log(hardhatToken.address);
 
     // accounts coming from hardhat.config networks.accounts
     const accounts = await ethers.getSigners();

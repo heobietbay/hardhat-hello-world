@@ -8,7 +8,7 @@ const config: HardhatUserConfig = {
   defaultNetwork: "localhost",
   networks: {
     localhost: {
-      url: "http://127.0.0.1:8545",
+      url: "http://127.0.0.1:7545",
       accounts: [`0x${process.env.ACCOUNT1_PRIVATEKEY}`,`0x${process.env.ACCOUNT2_PRIVATEKEY}`],
     }
 
