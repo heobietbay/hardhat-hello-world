@@ -8,8 +8,8 @@ const config: HardhatUserConfig = {
   defaultNetwork: "localhost",
   networks: {
     localhost: {
-      url: "http://127.0.0.1:7545",
-      //accounts: [`0x${process.env.ACCOUNT1_PRIVATEKEY}`,`0x${process.env.ACCOUNT2_PRIVATEKEY}`],
+      url: "http://127.0.0.1:8545",
+      accounts: [`0x${process.env.ACCOUNT1_PRIVATEKEY}`,`0x${process.env.ACCOUNT2_PRIVATEKEY}`],
     }, 
     goerli: {
       url: "https://eth-mainnet.g.alchemy.com/v2/{ALCHEMY_KEY}",
